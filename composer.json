@@ -1,0 +1,25 @@
+{
+  "name": "stolfam/eshop",
+  "license": "MIT",
+  "description": "PHP Classes for e-shop system.",
+  "version": "0.0.1",
+  "type": "library",
+  "require": {
+    "php": ">= 7.2.0",
+    "nette/utils": ">= 2.4",
+    "ataccama/utils-php": "^2.0"
+  },
+  "require-dev": {
+    "nette/tester": ">= 2.3"
+  },
+  "autoload": {
+    "classmap": ["src/"],
+    "files": ["src/bootstrap.php"]
+  },
+  "minimum-stability": "stable",
+  "config": {
+    "platform": {
+      "php": "7.2"
+    }
+  }
+}
