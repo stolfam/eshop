@@ -2,7 +2,9 @@
 
     namespace Stolfam\Eshop\Env\Tags;
 
-    use Ataccama\Common\Env\Databaseable;
+    use Ataccama\Common\Env\Arrays\StringPair;
+    use Ataccama\Common\Env\Arrays\StringPairArray;
+    use Ataccama\Common\Env\Storable;
     use Nette\Utils\Strings;
 
 
@@ -10,13 +12,10 @@
      * Class TagDef
      * @package Stolfam\Eshop\Env\Tags
      */
-    class TagDef implements Databaseable
+    class TagDef implements Storable
     {
-        /** @var string */
-        public $title;
-
-        /** @var string */
-        public $name;
+        public string $title;
+        public string $name;
 
         /**
          * TagDef constructor.
@@ -34,11 +33,11 @@
 
         }
 
-        public function row(): array
+        public function toPairs(): StringPairArray
         {
-            return [
-                'title' => $this->title,
-                'name'  => Strings::webalize($this->name)
-            ];
+            return new StringPairArray([
+                new StringPair("title", $this->title),
+                new StringPair("name", Strings::webalize($this->name))
+            ]);
         }
     }

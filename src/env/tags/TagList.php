@@ -31,11 +31,11 @@
         }
 
         /**
-         * @param $id
-         * @return Tag
+         * @param $tagId
+         * @return Tag|null
          */
-        public function get($id): Tag
+        public function get($tagId): ?Tag
         {
-            return parent::get($id);
+            return parent::get($tagId);
         }
     }

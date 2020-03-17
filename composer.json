@@ -1,13 +1,13 @@
 {
   "name": "stolfam/eshop",
   "license": "MIT",
-  "description": "PHP Classes for e-shop system.",
-  "version": "0.0.1",
+  "description": "PHP Classes for building an e-shop system.",
+  "version": "1.0.0",
   "type": "library",
   "require": {
-    "php": ">= 7.2.0",
-    "nette/utils": ">= 2.4",
-    "ataccama/utils-php": "^2.0"
+    "php": ">= 7.4.0",
+    "nette/utils": ">= 3.0",
+    "ataccama/utils-php": "^3.0"
   },
   "require-dev": {
     "nette/tester": ">= 2.3"
@@ -19,7 +19,7 @@
   "minimum-stability": "stable",
   "config": {
     "platform": {
-      "php": "7.2"
+      "php": "7.4"
     }
   }
 }
