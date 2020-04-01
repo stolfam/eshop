@@ -6,7 +6,7 @@ Universal PHP Classes for e-shop system.
 
 ## Install
 ```
-composer install stolfam/eshop
+composer require stolfam/eshop
 ```
 
 ## What's inside?
