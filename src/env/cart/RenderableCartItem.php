@@ -11,7 +11,7 @@
      * @package Stolfam\Eshop\Env\Cart
      * @property-read bool $available
      */
-    class PrintableCartItem
+    class RenderableCartItem
     {
 use SmartObject;
 

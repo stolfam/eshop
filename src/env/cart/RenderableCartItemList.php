@@ -6,13 +6,13 @@
 
 
     /**
-     * Class PrintableCartItemList
+     * Class RenderableCartItemList
      * @package Stolfam\Eshop\Env\Cart
      */
-    class PrintableCartItemList extends BaseArray
+    class RenderableCartItemList extends BaseArray
     {
         /**
-         * @param PrintableCartItem $printableCartItem
+         * @param RenderableCartItem $printableCartItem
          * @return BaseArray
          */
         public function add($printableCartItem)
@@ -21,18 +21,18 @@
         }
 
         /**
-         * @return PrintableCartItem
+         * @return RenderableCartItem
          */
-        public function current(): PrintableCartItem
+        public function current(): RenderableCartItem
         {
             return parent::current();
         }
 
         /**
          * @param int $cartItemId
-         * @return PrintableCartItem
+         * @return RenderableCartItem
          */
-        public function get($cartItemId): PrintableCartItem
+        public function get($cartItemId): RenderableCartItem
         {
             return parent::get($cartItemId);
         }

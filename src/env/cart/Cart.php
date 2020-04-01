@@ -113,13 +113,13 @@
 
         /**
          * @param IProductsRepository $productsRepository
-         * @return PrintableCartItemList
+         * @return RenderableCartItemList
          */
-        public function listPrintableProducts(IProductsRepository $productsRepository): PrintableCartItemList
+        public function listPrintableProducts(IProductsRepository $productsRepository): RenderableCartItemList
         {
-            $list = new PrintableCartItemList();
+            $list = new RenderableCartItemList();
             foreach ($this->listProducts() as $cartItem) {
-                $list->add(new PrintableCartItem($productsRepository->getProduct($cartItem->product),
+                $list->add(new RenderableCartItem($productsRepository->getProduct($cartItem->product),
                     $cartItem->quantity));
             }
 
