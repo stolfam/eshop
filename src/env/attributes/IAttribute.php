@@ -16,4 +16,6 @@
     interface IAttribute extends IEntry, IApiArray
     {
         public function getName(): string;
+
+        public function getValues(): ValueList;
     }

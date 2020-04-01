@@ -18,7 +18,7 @@
          */
         public function add($attribute)
         {
-            $this->items[] = $attribute;
+            $this->items[$attribute->getId()] = $attribute;
 
             return $this;
         }
@@ -32,19 +32,19 @@
         }
 
         /**
-         * @param $i
+         * @param $id
          * @return IAttribute
          */
-        public function get($i): IAttribute
+        public function get($id): IAttribute
         {
-            return parent::get($i);
+            return parent::get($id);
         }
 
         public function toApiArray(): array
         {
             $arr = [];
             foreach ($this as $attribute) {
-                $arr[] = $attribute->toApiArray();
+                $arr[$attribute->getId()] = $attribute->toApiArray();
             }
 
             return $arr;
