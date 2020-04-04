@@ -1,6 +1,6 @@
 <?php
 
-    namespace Stolfam\Eshop\Env\Deals;
+    namespace Stolfam\Eshop\Utils;
 
     use Ataccama\Common\Env\IApiArray;
     use Nette\SmartObject;
