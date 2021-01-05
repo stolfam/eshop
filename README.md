@@ -29,6 +29,6 @@ I recommend creating your own classes and implementing all interfaces (repositor
 For example:
 ```
 class MyAttribute implements IAttribute {
-    // here would be your implementation
+    // here should be your implementation
 }
 ```
