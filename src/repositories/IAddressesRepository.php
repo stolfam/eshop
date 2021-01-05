@@ -1,23 +1,50 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Repositories\Interfaces;
 
-    use Ataccama\Common\Env\IEntry;
     use Stolfam\Eshop\Env\Customers\Address;
     use Stolfam\Eshop\Env\Customers\AddressDef;
 
-
     /**
      * Interface IAddressesRepository
+     *
      * @package Stolfam\Eshop\Repositories\Interfaces
      */
     interface IAddressesRepository
     {
-        public function getAddress(IEntry $address): Address;
+        /**
+         * @param int $addressId
+         *
+         * @return Address
+         */
+        public function getAddress(int $addressId): Address;
 
+        /**
+         * @param Address $address
+         *
+         * @return Address
+         */
         public function updateAddress(Address $address): Address;
 
+        /**
+         * @param AddressDef $address
+         *
+         * @return Address
+         */
         public function createAddress(AddressDef $address): Address;
 
-        public function deleteAddress(IEntry $address): bool;
+        /**
+         * @param int $addressId
+         *
+         * @return bool
+         */
+        public function deleteAddress(int $addressId): bool;
+
+        /**
+         * @param int $customerId
+         *
+         * @return mixed
+         */
+        public function listAddressesByCustomer(int $customerId);
     }

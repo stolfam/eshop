@@ -1,25 +1,20 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Orders;
 
-    use Ataccama\Common\Env\IEntry;
-    use Ataccama\Common\Utils\Comparator\Comparable;
     use Nette\Utils\DateTime;
+    use Stolfam\Interfaces\IdentifiableByInteger;
 
 
     /**
      * Interface Status
+     *
      * @package Stolfam\Eshop\Env\Orders
      */
-    abstract class Status implements IEntry, Comparable
+    abstract class Status implements IdentifiableByInteger
     {
         public abstract function getTitle(): string;
 
         public abstract function getDate(): DateTime;
-
-        public function getValue(): int
-        {
-            return $this->getDate()
-                ->getTimestamp();
-        }
     }

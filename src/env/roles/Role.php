@@ -1,27 +1,28 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Roles;
 
-    use Ataccama\Common\Env\BaseEntry;
-    use Ataccama\Common\Env\IApiArray;
-    use Ataccama\Common\Env\IEntry;
-
+    use Stolfam\Interfaces\IdentifiableByInteger;
+    use Stolfam\Traits\IdentifiedByInteger;
 
     /**
      * Class Role
+     *
      * @package Stolfam\Eshop\Env\Roles
      */
-    class Role extends RoleDef implements IEntry, IApiArray
+    class Role extends RoleDef implements IdentifiableByInteger
     {
-        use BaseEntry;
+        use IdentifiedByInteger;
 
         /**
          * Role constructor.
-         * @param int         $id
-         * @param string      $name
-         * @param IEntry|null $parentRole
+         *
+         * @param int                        $id
+         * @param string                     $name
+         * @param IdentifiableByInteger|null $parentRole
          */
-        public function __construct(int $id, string $name, ?IEntry $parentRole = null)
+        public function __construct(int $id, string $name, ?IdentifiableByInteger $parentRole = null)
         {
             parent::__construct($name, $parentRole);
             $this->id = $id;

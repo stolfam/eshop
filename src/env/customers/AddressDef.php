@@ -1,26 +1,31 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Customers;
 
-    use Ataccama\Common\Env\Arrays\StringPair;
-    use Ataccama\Common\Env\Arrays\StringPairArray;
-    use Ataccama\Common\Env\Storable;
-
+    use Stolfam\Env\Person\Address;
+    use Stolfam\Interfaces\IStorable;
+    use Stolfam\Table\NullableStringColumn;
+    use Stolfam\Table\Row;
+    use Stolfam\Table\StringColumn;
 
     /**
      * Class AddressDef
-     * @package Stolfam\Eshop\Env\Customers
      *
-     * Definition of an address. Use it for creating via IAddressesRepository.
+     * @package Stolfam\Eshop\Env\Customers
      */
-    class AddressDef extends \Ataccama\Common\Env\User\Address implements Storable
+    class AddressDef extends Address implements IStorable
     {
+        public ?string $companyName;
+
         /**
-         * Address constructor.
+         * AddressDef constructor.
+         *
          * @param string      $street
          * @param string      $city
          * @param string      $postcode
          * @param string      $country
+         * @param string|null $companyName
          * @param string|null $state
          * @param string|null $additionalDetail
          */
@@ -28,22 +33,24 @@
             string $street,
             string $city,
             string $postcode,
-            string $country,
+            string $country, ?string $companyName,
             ?string $state = null,
-            ?string $additionalDetail = null
-        ) {
+            ?string $additionalDetail = null)
+        {
             parent::__construct($street, $city, $postcode, $country, $state, $additionalDetail);
+            $this->companyName = $companyName;
         }
 
-        public function toPairs(): StringPairArray
+        public function toRow(): Row
         {
-            return new StringPairArray([
-                new StringPair('street', $this->street),
-                new StringPair('city', $this->city),
-                new StringPair('postcode', $this->postcode),
-                new StringPair('country', $this->country),
-                new StringPair('state', $this->state),
-                new StringPair('additional_detail', $this->additionalDetail),
+            return new Row([
+                new NullableStringColumn("company_name", $this->companyName),
+                new StringColumn("street", $this->street),
+                new StringColumn("city", $this->city),
+                new StringColumn("postcode", $this->postcode),
+                new StringColumn("country", $this->country),
+                new NullableStringColumn("state", $this->state),
+                new NullableStringColumn("additional_detail", $this->additionalDetail),
             ]);
         }
     }

@@ -1,9 +1,11 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Cart;
 
     /**
      * Interface ICartStorage
+     *
      * @package Stolfam\Eshop\Env\Cart
      */
     interface ICartStorage

@@ -1,29 +1,30 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Products;
 
-    use Ataccama\Common\Env\BaseEntry;
-    use Ataccama\Common\Env\IApiArray;
-    use Ataccama\Common\Env\IEntry;
-    use Stolfam\Eshop\Env\Deals\Price;
-
+    use Stolfam\Eshop\Utils\Price;
+    use Stolfam\Interfaces\IdentifiableByInteger;
+    use Stolfam\Traits\IdentifiedByInteger;
 
     /**
      * Class Product
+     *
      * @package Stolfam\Eshop\Env\Products
      */
-    class Product extends ProductDef implements IEntry, IApiArray
+    class Product extends ProductDef implements IdentifiableByInteger
     {
-        use BaseEntry;
+        use IdentifiedByInteger;
 
         /**
          * Product constructor.
-         * @param int        $id
-         * @param string     $name
-         * @param Price|null $price
-         * @param int        $quantity
+         *
+         * @param int    $id
+         * @param string $name
+         * @param Price  $price
+         * @param int    $quantity
          */
-        public function __construct(int $id, string $name, ?Price $price = null, int $quantity = 0)
+        public function __construct(int $id, string $name, Price $price, int $quantity = 0)
         {
             parent::__construct($name, $price, $quantity);
             $this->id = $id;

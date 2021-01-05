@@ -12,9 +12,9 @@
             $this->roles = new \Stolfam\Eshop\Env\Roles\RoleList();
         }
 
-        public function getRole(\Ataccama\Common\Env\IEntry $role): \Stolfam\Eshop\Env\Roles\Role
+        public function getRole(int $roleId): \Stolfam\Eshop\Env\Roles\Role
         {
-            return $this->roles->get($role->id);
+            return $this->roles->get($roleId);
         }
 
         public function createRole(\Stolfam\Eshop\Env\Roles\RoleDef $roleDef): \Stolfam\Eshop\Env\Roles\Role
@@ -26,12 +26,12 @@
             return $role;
         }
 
-        public function listRolesByUser(\Ataccama\Common\Env\IEntry $user): \Stolfam\Eshop\Env\Roles\RoleList
+        public function listRolesByUser(int $userId): \Stolfam\Eshop\Env\Roles\RoleList
         {
             return $this->roles;
         }
 
-        public function deleteRole(\Ataccama\Common\Env\IEntry $role): bool
+        public function deleteRole(int $roleId): bool
         {
             return $this->roles->remove($role->id);
         }
@@ -39,8 +39,6 @@
 
     $role = $rolesRepository->createRole(new \Stolfam\Eshop\Env\Roles\RoleDef("guest"));
 
-    \Tester\Assert::same("guest", $rolesRepository->getRole(new \Ataccama\Common\Env\Entry(1))->name);
+    \Tester\Assert::same("guest", $rolesRepository->getRole(1)->name);
 
-    \Tester\Assert::same(1, $rolesRepository->getRole(new \Ataccama\Common\Env\Entry(1))->id);
-
-    \Tester\Assert::same("guest", $rolesRepository->getRole(new \Ataccama\Common\Env\Entry(1))->toPairs()->tryToGetByKey('name')->getValue());
+    \Tester\Assert::same(1, $rolesRepository->getRole(1)->id);

@@ -1,26 +1,26 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Cart;
 
-    use Ataccama\Common\Env\BaseEntry;
-    use Ataccama\Common\Env\IEntry;
     use Nette\Utils\Random;
     use Stolfam\Eshop\Repositories\Interfaces\IProductsRepository;
-
+    use Stolfam\Interfaces\IdentifiableByString;
+    use Stolfam\Traits\IdentifiedByString;
 
     /**
      * Class Cart
+     *
      * @package Stolfam\Eshop\Env\Cart
      */
-    class Cart implements IEntry
+    class Cart implements IdentifiableByString
     {
-        use BaseEntry;
-
         private CartItemList $products;
         private ICartStorage $storage;
 
         /**
          * Cart constructor.
+         *
          * @param ICartStorage $storage
          */
         public function __construct(ICartStorage $storage)
@@ -30,7 +30,7 @@
             $this->load();
         }
 
-        public function getId()
+        public function getId(): string
         {
             if (isset($this->id)) {
                 return $this->id;
@@ -43,19 +43,21 @@
         }
 
         /**
-         * @param IEntry $product
-         * @param int    $quantity
+         * @param int $productId
+         * @param int $quantity
+         *
          * @return bool
          */
-        public function addProduct(IEntry $product, int $quantity = 1): bool
+        public function addProduct(int $productId, int $quantity = 1): bool
         {
-            $this->products->add(new CartItem($product, $quantity));
+            $this->products->add(new CartItem($productId, $quantity));
 
             return $this->save();
         }
 
         /**
          * @param int $cartItemId
+         *
          * @return bool
          */
         public function removeProduct(int $cartItemId): bool
@@ -100,6 +102,12 @@
             $this->save();
         }
 
+        /**
+         * @param int $cartItemId
+         * @param int $quantity
+         *
+         * @return bool
+         */
         public function update(int $cartItemId, int $quantity)
         {
             if ($this->products->get($cartItemId)) {
@@ -113,13 +121,14 @@
 
         /**
          * @param IProductsRepository $productsRepository
+         *
          * @return RenderableCartItemList
          */
         public function listPrintableProducts(IProductsRepository $productsRepository): RenderableCartItemList
         {
             $list = new RenderableCartItemList();
             foreach ($this->listProducts() as $cartItem) {
-                $list->add(new RenderableCartItem($productsRepository->getProduct($cartItem->product),
+                $list->add(new RenderableCartItem($productsRepository->getProduct($cartItem->productId),
                     $cartItem->quantity));
             }
 

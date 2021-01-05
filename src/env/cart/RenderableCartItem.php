@@ -1,4 +1,5 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Cart;
 
@@ -8,18 +9,20 @@
 
     /**
      * Class PrintableCartItem
+     *
      * @package Stolfam\Eshop\Env\Cart
      * @property-read bool $available
      */
     class RenderableCartItem
     {
-use SmartObject;
+        use SmartObject;
 
         public Product $product;
         public int $quantity;
 
         /**
          * CartItem constructor.
+         *
          * @param Product $product
          * @param int     $quantity
          */

@@ -1,21 +1,24 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Tags;
 
-    use Ataccama\Common\Env\BaseEntry;
-    use Ataccama\Common\Env\IEntry;
 
+    use Stolfam\Interfaces\IdentifiableByInteger;
+    use Stolfam\Traits\IdentifiedByInteger;
 
     /**
      * Class Tag
+     *
      * @package Stolfam\Eshop\Env\Tags
      */
-    class Tag extends TagDef implements IEntry
+    class Tag extends TagDef implements IdentifiableByInteger
     {
-        use BaseEntry;
+        use IdentifiedByInteger;
 
         /**
          * Tag constructor.
+         *
          * @param int         $id
          * @param string      $title
          * @param string|null $name

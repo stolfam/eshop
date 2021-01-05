@@ -1,26 +1,51 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Repositories\Interfaces;
 
-    use Ataccama\Common\Env\IEntry;
     use Stolfam\Eshop\Env\Attributes\AttributeList;
     use Stolfam\Eshop\Env\Attributes\IAttribute;
 
-
     /**
      * Interface IAttributesRepository
+     *
      * @package Stolfam\Eshop\Repositories\Interfaces
      *
      */
     interface IAttributesRepository
     {
-        public function getAttribute(IEntry $attribute): IAttribute;
+        /**
+         * @param int $attributeId
+         *
+         * @return IAttribute
+         */
+        public function getAttribute(int $attributeId): IAttribute;
 
+        /**
+         * @param IAttribute $attribute
+         *
+         * @return IAttribute
+         */
         public function createAttribute(IAttribute $attribute): IAttribute;
 
-        public function deleteAttribute(IEntry $attribute): bool;
+        /**
+         * @param int $attributeId
+         *
+         * @return bool
+         */
+        public function deleteAttribute(int $attributeId): bool;
 
+        /**
+         * @param IAttribute $attribute
+         *
+         * @return IAttribute
+         */
         public function updateAttribute(IAttribute $attribute): IAttribute;
 
-        public function listAttributes(IEntry $product): AttributeList;
+        /**
+         * @param int $productId
+         *
+         * @return AttributeList
+         */
+        public function listAttributes(int $productId): AttributeList;
     }

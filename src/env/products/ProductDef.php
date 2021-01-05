@@ -1,21 +1,23 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Products;
 
-    use Ataccama\Common\Env\Arrays\StringPair;
-    use Ataccama\Common\Env\Arrays\StringPairArray;
-    use Ataccama\Common\Env\Storable;
     use Stolfam\Eshop\Env\Attributes\AttributeList;
-    use Stolfam\Eshop\Env\Deals\Currency;
-    use Stolfam\Eshop\Env\Deals\Price;
     use Stolfam\Eshop\Env\Tags\TagList;
-
+    use Stolfam\Eshop\Utils\Price;
+    use Stolfam\Interfaces\IStorable;
+    use Stolfam\Table\FloatColumn;
+    use Stolfam\Table\IntegerColumn;
+    use Stolfam\Table\Row;
+    use Stolfam\Table\StringColumn;
 
     /**
      * Class ProductDef
+     *
      * @package Stolfam\Eshop\Env\Products
      */
-    class ProductDef implements Storable
+    class ProductDef implements IStorable
     {
         public string $name;
         public Price $price;
@@ -25,20 +27,17 @@
 
         /**
          * ProductDef constructor.
+         *
          * @param string       $name
          * @param Price        $price
          * @param int          $quantity
          * @param TagList|null $tagList
          */
-        public function __construct(string $name, Price $price = null, int $quantity = 0, ?TagList $tagList = null)
+        public function __construct(string $name, Price $price, int $quantity = 0, ?TagList $tagList = null)
         {
             $this->name = $name;
             $this->price = $price;
             $this->quantity = $quantity;
-
-            if (!isset($price)) {
-                $this->price = new Price(0, Currency::czk());
-            }
 
             $this->attributes = new AttributeList();
             if (isset($tagList)) {
@@ -48,12 +47,12 @@
             }
         }
 
-        public function toPairs(): StringPairArray
+        public function toRow(): Row
         {
-            return new StringPairArray([
-                new StringPair("name", $this->name),
-                new StringPair("price", $this->price->value),
-                new StringPair("currency_id", $this->price->currency->id)
+            return new Row([
+                new StringColumn("name", $this->name),
+                new FloatColumn("price", $this->price->value),
+                new IntegerColumn("currency_id", $this->price->currency->id)
             ]);
         }
     }
