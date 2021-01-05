@@ -1,18 +1,18 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Utils;
 
-    use Ataccama\Common\Env\IApiArray;
     use Nette\SmartObject;
 
 
     /**
      * Class Symbol
-     * @package Stolfam\Env\Deals
+     * @package Stolfam\Eshop\Utils
      * @property-read string $before
      * @property-read string $after
      */
-    class Symbol implements IApiArray
+    class Symbol
     {
         use SmartObject;
 
@@ -49,7 +49,7 @@
         {
             return [
                 'before' => $this->before,
-                'after'  => $this->after
+                'after' => $this->after
             ];
         }
     }

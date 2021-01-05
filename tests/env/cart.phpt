@@ -5,13 +5,13 @@
 
     $cart = new \Stolfam\Eshop\Env\Cart\Cart(new \Stolfam\Eshop\Test\Implementations\CartStorage());
 
-    $cart->addProduct(new \Ataccama\Common\Env\Entry(1));
-    $cart->addProduct(new \Ataccama\Common\Env\Entry(2));
+    $cart->addProduct(1);
+    $cart->addProduct(2);
 
-    \Tester\Assert::same('1', $cart->listProducts()
-        ->get(0)->product->id);
-    \Tester\Assert::same('2', $cart->listProducts()
-        ->get(1)->product->id);
+    \Tester\Assert::same(1, $cart->listProducts()
+        ->get(0)->productId);
+    \Tester\Assert::same(2, $cart->listProducts()
+        ->get(1)->productId);
 
     \Tester\Assert::count(2, $cart->listProducts());
 

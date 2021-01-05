@@ -1,48 +1,47 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Orders;
 
-    use Ataccama\Common\Env\Arrays\StringPair;
-    use Ataccama\Common\Env\Arrays\StringPairArray;
-    use Ataccama\Common\Env\IEntry;
-    use Ataccama\Common\Env\Storable;
     use Nette\Utils\DateTime;
     use Stolfam\Eshop\Env\Products\ProductList;
+    use Stolfam\Interfaces\IdentifiableByInteger;
+    use Stolfam\Interfaces\IStorable;
+    use Stolfam\Table\IntegerColumn;
+    use Stolfam\Table\Row;
+    use Stolfam\Table\StringColumn;
 
 
     /**
      * Class OrderDef
+     *
      * @package Stolfam\Eshop\Env\Orders
      */
-    class OrderDef implements Storable
+    class OrderDef implements IStorable
     {
         public ProductList $products;
         public DateTime $dtCreated;
-        public IEntry $customer;
-        public History $history;
+        public IdentifiableByInteger $customer;
 
         /**
          * OrderDef constructor.
-         * @param IEntry      $customer
-         * @param ProductList $products
-         * @param History     $history
-         * @param DateTime    $dtCreated
+         *
+         * @param IdentifiableByInteger $customer
+         * @param ProductList           $products
+         * @param DateTime              $dtCreated
          */
-        public function __construct(IEntry $customer, ProductList $products, History $history, DateTime $dtCreated)
+        public function __construct(IdentifiableByInteger $customer, ProductList $products, DateTime $dtCreated)
         {
             $this->products = $products;
             $this->dtCreated = $dtCreated;
             $this->customer = $customer;
-            $this->history = $history;
         }
 
-        public function toPairs(): StringPairArray
+        public function toRow(): Row
         {
-            return new StringPairArray([
-                new StringPair('order_id', $this->id),
-                new StringPair('customer_id', $this->customer->id),
-                new StringPair('dt_created', $this->dtCreated->format(DATE_ISO8601)),
-                new StringPair('status_id', $this->history->getLast()->id)
+            return new Row([
+                new IntegerColumn('customer_id', $this->customer->id),
+                new StringColumn('dt_created', $this->dtCreated->format(DATE_ISO8601))
             ]);
         }
     }

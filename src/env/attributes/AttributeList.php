@@ -1,19 +1,20 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Attributes;
 
-    use Ataccama\Common\Env\BaseArray;
-    use Ataccama\Common\Env\IApiArray;
-
+    use Stolfam\Arrays\BaseArray;
 
     /**
      * Class AttributeList
+     *
      * @package Stolfam\Eshop\Env\Attributes
      */
-    class AttributeList extends BaseArray implements IApiArray
+    class AttributeList extends BaseArray
     {
         /**
          * @param IAttribute $attribute
+         *
          * @return AttributeList
          */
         public function add($attribute)
@@ -33,6 +34,7 @@
 
         /**
          * @param $id
+         *
          * @return IAttribute
          */
         public function get($id): IAttribute

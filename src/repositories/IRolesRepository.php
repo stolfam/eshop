@@ -1,8 +1,8 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Repositories\Interfaces;
 
-    use Ataccama\Common\Env\IEntry;
     use Stolfam\Eshop\Env\Roles\Role;
     use Stolfam\Eshop\Env\Roles\RoleDef;
     use Stolfam\Eshop\Env\Roles\RoleList;
@@ -10,31 +10,36 @@
 
     /**
      * Interface IRolesRepository
+     *
      * @package Stolfam\Eshop\Repositories\Interfaces
      */
     interface IRolesRepository
     {
         /**
-         * @param IEntry $role
+         * @param int $roleId
+         *
          * @return Role
          */
-        public function getRole(IEntry $role): Role;
+        public function getRole(int $roleId): Role;
 
         /**
          * @param RoleDef $roleDef
+         *
          * @return Role
          */
         public function createRole(RoleDef $roleDef): Role;
 
         /**
-         * @param IEntry $user
+         * @param int $userId
+         *
          * @return RoleList
          */
-        public function listRolesByUser(IEntry $user): RoleList;
+        public function listRolesByUser(int $userId): RoleList;
 
         /**
-         * @param IEntry $role
+         * @param int $roleId
+         *
          * @return bool
          */
-        public function deleteRole(IEntry $role): bool;
+        public function deleteRole(int $roleId): bool;
     }

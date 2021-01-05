@@ -1,25 +1,25 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Utils;
 
-    use Ataccama\Common\Env\IApiArray;
-
-
     /**
      * Class Price
-     * @package Stolfam\Env\Deals
+     *
+     * @package Stolfam\Eshop\Utils
      */
-    class Price implements IApiArray
+    class Price
     {
-        public int $value;
+        public float $value;
         public Currency $currency;
 
         /**
          * Price constructor.
-         * @param int      $value
+         *
+         * @param float    $value
          * @param Currency $currency
          */
-        public function __construct(int $value, Currency $currency)
+        public function __construct(float $value, Currency $currency)
         {
             $this->value = $value;
             $this->currency = $currency;
@@ -51,6 +51,7 @@
 
         /**
          * @param Price $price
+         *
          * @return bool
          */
         public function equal(Price $price): bool

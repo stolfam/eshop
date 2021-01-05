@@ -1,27 +1,32 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Cart;
 
-    use Ataccama\Common\Env\IEntry;
-
+    use Stolfam\Eshop\Env\Attributes\AttributeList;
 
     /**
      * Class CartItem
+     *
      * @package Stolfam\Eshop\Env\Cart
      */
     class CartItem
     {
-        public IEntry $product;
-        public int $quantity;
+        public int $productId;
+        public int $quantity = 1;
+        public ?AttributeList $attributes;
 
         /**
          * CartItem constructor.
-         * @param IEntry $product
-         * @param int    $quantity
+         *
+         * @param int                $productId
+         * @param int                $quantity
+         * @param AttributeList|null $attributes
          */
-        public function __construct(IEntry $product, int $quantity = 1)
+        public function __construct(int $productId, int $quantity = 1, ?AttributeList $attributes = null)
         {
-            $this->product = $product;
+            $this->productId = $productId;
             $this->quantity = $quantity;
+            $this->attributes = $attributes;
         }
     }

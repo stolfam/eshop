@@ -1,18 +1,20 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Customers;
 
-    use Ataccama\Common\Env\BaseArray;
-
+    use Stolfam\Arrays\BaseArray;
 
     /**
      * Class CustomerList
+     *
      * @package Stolfam\Eshop\Env\Customers
      */
     class CustomerList extends BaseArray
     {
         /**
          * @param Customer $customer
+         *
          * @return CustomerList
          */
         public function add($customer)
@@ -32,6 +34,7 @@
 
         /**
          * @param $customerId
+         *
          * @return Customer|null
          */
         public function get($customerId): ?Customer
@@ -41,6 +44,7 @@
 
         /**
          * @param CustomerList $customerList
+         *
          * @return CustomerList
          */
         public function insert($customerList)

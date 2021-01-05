@@ -15,10 +15,10 @@
             $this->products = new \Stolfam\Eshop\Env\Products\ProductList();
         }
 
-        public function getProduct(\Ataccama\Common\Env\IEntry $product): \Stolfam\Eshop\Env\Products\Product
+        public function getProduct(int $productId): \Stolfam\Eshop\Env\Products\Product
         {
             foreach ($this->products as $p) {
-                if ($p->id == $product->id) {
+                if ($p->id == $productId) {
                     return $p;
                 }
             }
@@ -39,7 +39,7 @@
             return $this->products;
         }
 
-        public function deleteProduct(\Ataccama\Common\Env\IEntry $product): bool
+        public function deleteProduct(int $productId): bool
         {
             return $this->products->remove($product->id);
         }
@@ -51,7 +51,7 @@
     };
 
     $productDef = new \Stolfam\Eshop\Env\Products\ProductDef("product",
-        new \Stolfam\Eshop\Env\Deals\Price(199, \Stolfam\Eshop\Env\Deals\Currency::czk()), 10);
+        new \Stolfam\Eshop\Utils\Price(199, \Stolfam\Eshop\Utils\Currency::czk()), 10);
 
     $product = $productsRepository->createProduct($productDef);
 
@@ -59,14 +59,14 @@
 
     \Tester\Assert::count(1, $productsRepository->listProducts());
 
-    \Tester\Assert::same(199, $productsRepository->getProduct(new \Ataccama\Common\Env\Entry(1))->price->value);
+    \Tester\Assert::same(199.0, $productsRepository->getProduct(1)->price->value);
 
     \Tester\Assert::same(" Kč",
-        $productsRepository->getProduct(new \Ataccama\Common\Env\Entry(1))->price->currency->symbol->after);
+        $productsRepository->getProduct(1)->price->currency->symbol->after);
 
     $cart = new \Stolfam\Eshop\Env\Cart\Cart(new \Stolfam\Eshop\Test\Implementations\CartStorage());
 
-    $cart->addProduct($product);
+    $cart->addProduct($product->id);
 
     $list = $cart->listPrintableProducts($productsRepository);
 
@@ -74,4 +74,4 @@
 
     \Tester\Assert::same(true, $list->get(0)->available);
 
-    \Tester\Assert::same(199, $list->get(0)->product->price->value);
+    \Tester\Assert::same(199.0, $list->get(0)->product->price->value);
