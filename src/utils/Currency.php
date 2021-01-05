@@ -1,25 +1,26 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Utils;
 
-    use Ataccama\Common\Env\IApiArray;
-    use Ataccama\Common\Env\IEntry;
-    use Ataccama\Common\Env\Pair;
-    use Ataccama\Common\Env\Pairable;
-    use Nette\SmartObject;
+    use Stolfam\Env\Pair;
+    use Stolfam\Interfaces\IdentifiableByInteger;
+    use Stolfam\Interfaces\Pairable;
+    use Stolfam\Traits\IdentifiedByInteger;
 
 
     /**
      * Class Currency
-     * @package Stolfam\Env\Deals
+     *
+     * @package Stolfam\Eshop\Utils
      * @property-read int    $id
      * @property-read float  $ratio
      * @property-read Symbol $symbol
      * @property-read string $name
      */
-    class Currency implements IEntry, Pairable, IApiArray
+    class Currency implements IdentifiableByInteger, Pairable
     {
-        use SmartObject;
+        use IdentifiedByInteger;
 
         const CZK = 1;
         const USD = 2;
@@ -38,6 +39,7 @@
 
         /**
          * Currency constructor.
+         *
          * @param int    $id
          * @param string $name
          * @param float  $ratio
@@ -49,11 +51,6 @@
             $this->name = $name;
             $this->ratio = $ratio;
             $this->symbol = $symbol;
-        }
-
-        public function getId(): string
-        {
-            return $this->id;
         }
 
         /**
@@ -100,6 +97,7 @@
 
         /**
          * @param int $currencyId
+         *
          * @return Currency
          */
         public static function make(int $currencyId): Currency

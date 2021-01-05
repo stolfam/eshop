@@ -1,18 +1,20 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Roles;
 
-    use Ataccama\Common\Env\BaseArray;
-
+    use Stolfam\Arrays\BaseArray;
 
     /**
      * Class RoleList
+     *
      * @package Stolfam\Eshop\Env\Roles
      */
     class RoleList extends BaseArray
     {
         /**
          * @param Role $role
+         *
          * @return RoleList
          */
         public function add($role)
@@ -32,6 +34,7 @@
 
         /**
          * @param $roleId
+         *
          * @return Role
          */
         public function get($roleId): Role

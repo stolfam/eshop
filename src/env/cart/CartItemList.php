@@ -1,18 +1,20 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Cart;
 
-    use Ataccama\Common\Env\BaseArray;
-
+    use Stolfam\Arrays\BaseArray;
 
     /**
      * Class CartItemList
+     *
      * @package Stolfam\Eshop\Env\Cart
      */
     class CartItemList extends BaseArray
     {
         /**
          * @param CartItem $cartItem
+         *
          * @return CartItemList
          */
         public function add($cartItem)
@@ -32,6 +34,7 @@
 
         /**
          * @param int $cartItemId
+         *
          * @return CartItem
          */
         public function get($cartItemId): CartItem

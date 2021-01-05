@@ -1,24 +1,27 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Tags;
 
-    use Ataccama\Common\Env\Arrays\StringPair;
-    use Ataccama\Common\Env\Arrays\StringPairArray;
-    use Ataccama\Common\Env\Storable;
     use Nette\Utils\Strings;
+    use Stolfam\Interfaces\IStorable;
+    use Stolfam\Table\Row;
+    use Stolfam\Table\StringColumn;
 
 
     /**
      * Class TagDef
+     *
      * @package Stolfam\Eshop\Env\Tags
      */
-    class TagDef implements Storable
+    class TagDef implements IStorable
     {
         public string $title;
         public string $name;
 
         /**
          * TagDef constructor.
+         *
          * @param string      $title
          * @param string|null $name
          */
@@ -33,11 +36,11 @@
 
         }
 
-        public function toPairs(): StringPairArray
+        public function toRow(): Row
         {
-            return new StringPairArray([
-                new StringPair("title", $this->title),
-                new StringPair("name", Strings::webalize($this->name))
+            return new Row([
+                new StringColumn("title", $this->title),
+                new StringColumn("name", Strings::webalize($this->name))
             ]);
         }
     }

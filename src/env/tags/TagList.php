@@ -1,18 +1,20 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Tags;
 
-    use Ataccama\Common\Env\BaseArray;
-
+    use Stolfam\Arrays\BaseArray;
 
     /**
      * Class TagList
+     *
      * @package Stolfam\Eshop\Env\Tags
      */
     class TagList extends BaseArray
     {
         /**
          * @param Tag $tag
+         *
          * @return TagList
          */
         public function add($tag)
@@ -32,6 +34,7 @@
 
         /**
          * @param $tagId
+         *
          * @return Tag|null
          */
         public function get($tagId): ?Tag

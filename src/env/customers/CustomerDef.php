@@ -1,19 +1,22 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Customers;
 
-    use Ataccama\Common\Env\Arrays\StringPair;
-    use Ataccama\Common\Env\Arrays\StringPairArray;
-    use Ataccama\Common\Env\Email;
-    use Ataccama\Common\Env\Name;
-    use Ataccama\Common\Env\Storable;
-
+    use Stolfam\Env\Person\Address;
+    use Stolfam\Env\Person\Email;
+    use Stolfam\Env\Person\Name;
+    use Stolfam\Interfaces\IStorable;
+    use Stolfam\Table\NullableStringColumn;
+    use Stolfam\Table\Row;
+    use Stolfam\Table\StringColumn;
 
     /**
      * Class CustomerDef
+     *
      * @package Stolfam\Eshop\Env\Customers
      */
-    class CustomerDef implements Storable
+    class CustomerDef implements IStorable
     {
         public Name $name;
         public Email $email;
@@ -23,6 +26,7 @@
 
         /**
          * CustomerDef constructor.
+         *
          * @param Name         $name
          * @param Email        $email
          * @param Phone|null   $phone
@@ -35,7 +39,8 @@
             ?Phone $phone = null,
             ?Address $shippingAddress = null,
             ?Address $billingAddress = null
-        ) {
+        )
+        {
             $this->name = $name;
             $this->email = $email;
             $this->phone = $phone;
@@ -43,12 +48,13 @@
             $this->billingAddress = $billingAddress;
         }
 
-        public function toPairs(): StringPairArray
+        public function toRow(): Row
         {
-            return new StringPairArray([
-                new StringPair('name', "$this->name"),
-                new StringPair('email', "$this->email"),
-                new StringPair('phone', "$this->phone")
+            return new Row([
+                new StringColumn('name', "$this->name"),
+                new StringColumn('email', "$this->email"),
+                new NullableStringColumn('phone', "$this->phone"),
+                new StringColumn("dt_created", date(DATE_ISO8601))
             ]);
         }
     }

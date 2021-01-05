@@ -1,18 +1,20 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Orders;
 
-    use Ataccama\Common\Env\BaseArray;
-
+    use Stolfam\Arrays\BaseArray;
 
     /**
      * Class OrderList
+     *
      * @package Stolfam\Eshop\Env\Orders
      */
     class OrderList extends BaseArray
     {
         /**
          * @param Order $order
+         *
          * @return OrderList
          */
         public function add($order)
@@ -32,6 +34,7 @@
 
         /**
          * @param $orderId
+         *
          * @return Order|null
          */
         public function get($orderId): ?Order
@@ -41,6 +44,7 @@
 
         /**
          * @param OrderList $orderList
+         *
          * @return OrderList
          */
         public function insert($orderList)

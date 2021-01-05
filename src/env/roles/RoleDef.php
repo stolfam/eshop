@@ -1,38 +1,42 @@
 <?php
+    declare(strict_types=1);
 
     namespace Stolfam\Eshop\Env\Roles;
 
-    use Ataccama\Common\Env\Arrays\StringPair;
-    use Ataccama\Common\Env\Arrays\StringPairArray;
-    use Ataccama\Common\Env\IEntry;
-    use Ataccama\Common\Env\Storable;
 
+    use Stolfam\Interfaces\IdentifiableByInteger;
+    use Stolfam\Interfaces\IStorable;
+    use Stolfam\Table\NullableIntegerColumn;
+    use Stolfam\Table\Row;
+    use Stolfam\Table\StringColumn;
 
     /**
      * Class RoleDef
+     *
      * @package Stolfam\Eshop\Env\Roles
      */
-    class RoleDef implements Storable
+    class RoleDef implements IStorable
     {
         public string $name;
-        public ?IEntry $parentRole;
+        public ?IdentifiableByInteger $parentRole;
 
         /**
          * RoleDef constructor.
-         * @param string      $name
-         * @param IEntry|null $parentRole
+         *
+         * @param string                     $name
+         * @param IdentifiableByInteger|null $parentRole
          */
-        public function __construct(string $name, ?IEntry $parentRole = null)
+        public function __construct(string $name, ?IdentifiableByInteger $parentRole = null)
         {
             $this->name = $name;
             $this->parentRole = $parentRole;
         }
 
-        public function toPairs(): StringPairArray
+        public function toRow(): Row
         {
-            return new StringPairArray([
-                new StringPair("name", $this->name),
-                new StringPair("parent_role_id", is_null($this->parentRole) ? null : $this->parentRole->id),
+            return new Row([
+                new StringColumn("name", $this->name),
+                new NullableIntegerColumn("parent_role_id", is_null($this->parentRole) ? null : $this->parentRole->id),
             ]);
         }
     }

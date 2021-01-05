@@ -2,12 +2,12 @@
   "name": "stolfam/eshop",
   "license": "MIT",
   "description": "PHP Classes for building an e-shop system.",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "type": "library",
   "require": {
     "php": ">= 7.4.0",
-    "nette/utils": ">= 3.0",
-    "ataccama/utils-php": "^3.0"
+    "stolfam/utils-php": "^1.0",
+    "stolfam/cache-php": "^1.0"
   },
   "require-dev": {
     "nette/tester": ">= 2.3"
