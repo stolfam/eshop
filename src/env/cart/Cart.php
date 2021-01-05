@@ -15,8 +15,6 @@
      */
     class Cart implements IdentifiableByString
     {
-        use IdentifiedByString;
-
         private CartItemList $products;
         private ICartStorage $storage;
 

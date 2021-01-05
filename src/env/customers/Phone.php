@@ -39,6 +39,6 @@
          */
         public static function isValid(string $phone, string $pattern = self::CZECH_REGEX): bool
         {
-            return preg_match($pattern, $phone);
+            return (bool) preg_match($pattern, $phone);
         }
     }

@@ -28,10 +28,12 @@
          * @param string|null $additionalDetail
          */
         public function __construct(
-            int $id, string $street,
+            int $id,
+            string $street,
             string $city,
             string $postcode,
-            string $country, ?string $companyName,
+            string $country,
+            ?string $companyName = null,
             ?string $state = null,
             ?string $additionalDetail = null)
         {

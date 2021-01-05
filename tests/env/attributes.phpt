@@ -28,7 +28,7 @@
                     return "XS";
                 }
 
-                public function getId()
+                public function getId(): int
                 {
                     return 1;
                 }
@@ -40,7 +40,7 @@
                     return "XXL";
                 }
 
-                public function getId()
+                public function getId(): int
                 {
                     return 2;
                 }
@@ -49,7 +49,7 @@
             return $values;
         }
 
-        public function getId()
+        public function getId(): int
         {
             return 1;
         }
