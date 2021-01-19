@@ -3,8 +3,6 @@
 
     namespace Stolfam\Eshop\Env\Cart;
 
-    use Stolfam\Eshop\Env\Attributes\AttributeList;
-
     /**
      * Class CartItem
      *
@@ -14,19 +12,19 @@
     {
         public int $productId;
         public int $quantity = 1;
-        public ?AttributeList $attributes;
+        public ?array $attributeValueIds;
 
         /**
          * CartItem constructor.
          *
-         * @param int                $productId
-         * @param int                $quantity
-         * @param AttributeList|null $attributes
+         * @param int        $productId
+         * @param int        $quantity
+         * @param int[]|null $attributeValueIds
          */
-        public function __construct(int $productId, int $quantity = 1, ?AttributeList $attributes = null)
+        public function __construct(int $productId, int $quantity = 1, ?array $attributeValueIds = null)
         {
             $this->productId = $productId;
             $this->quantity = $quantity;
-            $this->attributes = $attributes;
+            $this->attributeValueIds = $attributeValueIds;
         }
     }

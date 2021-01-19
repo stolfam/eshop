@@ -12,7 +12,7 @@
     class CartStorage implements ICartStorage
     {
         /** @var \Stolfam\Eshop\Env\Cart\CartItemList[] */
-        private $storage = [];
+        private array $storage = [];
 
         public function save(string $id, \Stolfam\Eshop\Env\Cart\CartItemList $products): bool
         {

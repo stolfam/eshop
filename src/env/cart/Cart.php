@@ -8,6 +8,7 @@
     use Stolfam\Interfaces\IdentifiableByString;
     use Stolfam\Traits\IdentifiedByString;
 
+
     /**
      * Class Cart
      *
@@ -15,6 +16,9 @@
      */
     class Cart implements IdentifiableByString
     {
+        use IdentifiedByString;
+
+
         private CartItemList $products;
         private ICartStorage $storage;
 
@@ -32,25 +36,28 @@
 
         public function getId(): string
         {
-            if (isset($this->id)) {
+            if (!empty($this->id)) {
                 return $this->id;
             }
             if (isset($_COOKIE['cartId'])) {
                 return $_COOKIE['cartId'];
             } else {
-                return Random::generate(64);
+                $id = Random::generate(64);
+                setcookie("_cid", $id);
+
+                return $id;
             }
         }
 
         /**
-         * @param int $productId
-         * @param int $quantity
-         *
+         * @param int        $productId
+         * @param int        $quantity
+         * @param array|null $attributeValueIds
          * @return bool
          */
-        public function addProduct(int $productId, int $quantity = 1): bool
+        public function addProduct(int $productId, int $quantity = 1, ?array $attributeValueIds = null): bool
         {
-            $this->products->add(new CartItem($productId, $quantity));
+            $this->products->add(new CartItem($productId, $quantity, $attributeValueIds));
 
             return $this->save();
         }
