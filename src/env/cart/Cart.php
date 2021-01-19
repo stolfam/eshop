@@ -108,7 +108,7 @@
          *
          * @return bool
          */
-        public function update(int $cartItemId, int $quantity)
+        public function update(int $cartItemId, int $quantity): bool
         {
             if ($this->products->get($cartItemId)) {
                 $this->products->get($cartItemId)->quantity = $quantity;

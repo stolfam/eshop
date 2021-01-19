@@ -4,6 +4,7 @@
     namespace Stolfam\Eshop\Repositories\Interfaces;
 
     use Nette\Utils\Paginator;
+    use Stolfam\Eshop\Env\Products\Filter;
     use Stolfam\Eshop\Env\Products\Product;
     use Stolfam\Eshop\Env\Products\ProductDef;
     use Stolfam\Eshop\Env\Products\ProductList;
@@ -31,11 +32,11 @@
         public function createProduct(ProductDef $productDef): Product;
 
         /**
+         * @param Filter|null    $filter
          * @param Paginator|null $paginator
-         *
          * @return ProductList
          */
-        public function listProducts(Paginator &$paginator = null): ProductList;
+        public function listProducts(?Filter $filter = null, ?Paginator &$paginator = null): ProductList;
 
         /**
          * @param int $productId

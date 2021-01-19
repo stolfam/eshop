@@ -7,6 +7,7 @@
     use Stolfam\Interfaces\IdentifiableByInteger;
     use Stolfam\Traits\IdentifiedByInteger;
 
+
     /**
      * Class Product
      *
@@ -15,6 +16,7 @@
     class Product extends ProductDef implements IdentifiableByInteger
     {
         use IdentifiedByInteger;
+
 
         /**
          * Product constructor.
@@ -33,11 +35,13 @@
         public function toApiArray(): array
         {
             return [
-                'id'         => $this->id,
-                'name'       => $this->name,
-                'price'      => $this->price->toApiArray(),
-                'quantity'   => $this->quantity,
-                'attributes' => $this->attributes->toApiArray()
+                'id'                => $this->id,
+                'name'              => $this->name,
+                'price'             => $this->price->toApiArray(),
+                'quantity'          => $this->quantity,
+                'attributes'        => $this->attributes->toApiArray(),
+                'html_description'  => $this->htmlDescription,
+                'short_description' => $this->shortDescription
             ];
         }
     }

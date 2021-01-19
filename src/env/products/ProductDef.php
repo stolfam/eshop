@@ -9,8 +9,10 @@
     use Stolfam\Interfaces\IStorable;
     use Stolfam\Table\FloatColumn;
     use Stolfam\Table\IntegerColumn;
+    use Stolfam\Table\NullableStringColumn;
     use Stolfam\Table\Row;
     use Stolfam\Table\StringColumn;
+
 
     /**
      * Class ProductDef
@@ -24,6 +26,8 @@
         public int $quantity;
         public AttributeList $attributes;
         public TagList $tags;
+        public ?string $htmlDescription;
+        public ?string $shortDescription;
 
         /**
          * ProductDef constructor.
@@ -52,7 +56,10 @@
             return new Row([
                 new StringColumn("name", $this->name),
                 new FloatColumn("price", $this->price->value),
-                new IntegerColumn("currency_id", $this->price->currency->id)
+                new IntegerColumn("quantity", $this->quantity),
+                new IntegerColumn("currency_id", $this->price->currency->id),
+                new NullableStringColumn("html_description", $this->htmlDescription),
+                new NullableStringColumn("short_description", $this->shortDescription),
             ]);
         }
     }

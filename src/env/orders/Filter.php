@@ -5,6 +5,7 @@
 
     use Nette\Utils\DateTime;
 
+
     /**
      * Class Filter
      *
@@ -29,18 +30,22 @@
         /** @var DateTime|null */
         public ?DateTime $dateEnd;
 
+        /**
+         * Filter constructor.
+         * @param array $params
+         */
         public function __construct(array $params)
         {
             if (isset($params[self::CUSTOMER_IDS]) && is_array($params[self::CUSTOMER_IDS])) {
                 $this->customerIds = [];
                 foreach ($params[self::CUSTOMER_IDS] as $customerId) {
-                    $this->customerIds[] = (int)$customerId;
+                    $this->customerIds[] = (int) $customerId;
                 }
             }
             if (isset($params[self::STATUS_IDS]) && is_array($params[self::STATUS_IDS])) {
                 $this->statusIds = [];
                 foreach ($params[self::STATUS_IDS] as $statusId) {
-                    $this->statusIds[] = (int)$statusId;
+                    $this->statusIds[] = (int) $statusId;
                 }
             }
             if (isset($params[self::DATE_START]) && $params[self::DATE_START] instanceof DateTime) {

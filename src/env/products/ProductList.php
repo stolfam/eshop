@@ -5,6 +5,7 @@
 
     use Stolfam\Arrays\BaseArray;
 
+
     /**
      * Class ProductList
      *
