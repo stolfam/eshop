@@ -3,33 +3,41 @@
 
     namespace Stolfam\Eshop\Env\Cart;
 
+    use Nette\SmartObject;
     use Nette\Utils\Random;
     use Stolfam\Eshop\Repositories\Interfaces\IProductsRepository;
+    use Stolfam\Eshop\Utils\Currency;
+    use Stolfam\Eshop\Utils\Price;
     use Stolfam\Interfaces\IdentifiableByString;
-    use Stolfam\Traits\IdentifiedByString;
 
 
     /**
      * Class Cart
      *
      * @package Stolfam\Eshop\Env\Cart
+     * @property-read Price  $price
+     * @property-read string $id
      */
     class Cart implements IdentifiableByString
     {
-        use IdentifiedByString;
+        use SmartObject;
 
+
+        protected string $id;
 
         private CartItemList $products;
         private ICartStorage $storage;
+        private IProductsRepository $productsRepository;
 
         /**
          * Cart constructor.
-         *
-         * @param ICartStorage $storage
+         * @param ICartStorage        $storage
+         * @param IProductsRepository $productsRepository
          */
-        public function __construct(ICartStorage $storage)
+        public function __construct(ICartStorage $storage, IProductsRepository $productsRepository)
         {
             $this->storage = $storage;
+            $this->productsRepository = $productsRepository;
             $this->id = $this->getId();
             $this->load();
         }
@@ -37,10 +45,12 @@
         public function getId(): string
         {
             if (!empty($this->id)) {
+
                 return $this->id;
             }
-            if (isset($_COOKIE['cartId'])) {
-                return $_COOKIE['cartId'];
+            if (isset($_COOKIE['_cid'])) {
+
+                return $_COOKIE['_cid'];
             } else {
                 $id = Random::generate(64);
                 setcookie("_cid", $id);
@@ -127,18 +137,31 @@
         }
 
         /**
-         * @param IProductsRepository $productsRepository
-         *
          * @return RenderableCartItemList
          */
-        public function listPrintableProducts(IProductsRepository $productsRepository): RenderableCartItemList
+        public function listPrintableProducts(): RenderableCartItemList
         {
             $list = new RenderableCartItemList();
             foreach ($this->listProducts() as $cartItem) {
-                $list->add(new RenderableCartItem($productsRepository->getProduct($cartItem->productId),
+                $list->add(new RenderableCartItem($this->productsRepository->getProduct($cartItem->productId),
                     $cartItem->quantity));
             }
 
             return $list;
+        }
+
+        /**
+         * @return Price
+         */
+        public function getPrice(): Price
+        {
+            $price = new Price(0, Currency::getDefaultCurrency());
+            foreach ($this->products as $cartItem) {
+                $product = $this->productsRepository->getProduct($cartItem->productId);
+                $product->price->times($cartItem->quantity);
+                $price->plus($product->price);;
+            }
+
+            return $price;
         }
     }
