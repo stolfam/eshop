@@ -6,6 +6,7 @@
     use Stolfam\Eshop\Env\Attributes\AttributeList;
     use Stolfam\Eshop\Env\Attributes\IAttribute;
 
+
     /**
      * Interface IAttributesRepository
      *
@@ -47,5 +48,10 @@
          *
          * @return AttributeList
          */
-        public function listAttributes(int $productId): AttributeList;
+        public function listProductAttributes(int $productId): AttributeList;
+
+        /**
+         * @return AttributeList
+         */
+        public function listAttributes(): AttributeList;
     }

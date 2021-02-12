@@ -2,7 +2,7 @@
   "name": "stolfam/eshop",
   "license": "MIT",
   "description": "PHP Classes for building an e-shop system.",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "type": "library",
   "require": {
     "php": ">= 7.4.0",
