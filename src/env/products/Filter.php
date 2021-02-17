@@ -52,7 +52,7 @@
                 }
             }
 
-            if (empty($params[self::NAME])) {
+            if (!empty($params[self::NAME])) {
                 $this->name = (string) $params[self::NAME];
             }
 
