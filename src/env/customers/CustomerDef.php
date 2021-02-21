@@ -8,7 +8,7 @@
     use Stolfam\Eshop\Env\Consents\Consent;
     use Stolfam\Interfaces\IStorable;
     use Stolfam\Table\BoolColumn;
-    use Stolfam\Table\IntegerColumn;
+    use Stolfam\Table\NullableIntegerColumn;
     use Stolfam\Table\NullableStringColumn;
     use Stolfam\Table\Row;
     use Stolfam\Table\StringColumn;
@@ -66,10 +66,10 @@
                 $row->add(new BoolColumn($name, $given));
             }
             if (isset($this->shippingAddress)) {
-                $row->add(new IntegerColumn("default_shipping_address_id", $this->shippingAddress->id));
+                $row->add(new NullableIntegerColumn("default_shipping_address_id", $this->shippingAddress->id ?? null));
             }
             if (isset($this->billingAddress)) {
-                $row->add(new IntegerColumn("default_billing_address_id", $this->billingAddress->id));
+                $row->add(new NullableIntegerColumn("default_billing_address_id", $this->billingAddress->id ?? null));
             }
 
             return $row;
