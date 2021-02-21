@@ -4,13 +4,13 @@
     namespace Stolfam\Eshop\Env\Customers;
 
     use Nette\Utils\DateTime;
-    use Stolfam\Env\Person\Address;
     use Stolfam\Env\Person\Email;
     use Stolfam\Env\Person\Name;
     use Stolfam\Interfaces\IdentifiableByInteger;
     use Stolfam\Table\Row;
     use Stolfam\Table\StringColumn;
     use Stolfam\Traits\IdentifiedByInteger;
+
 
     /**
      * Class Customer
@@ -21,6 +21,7 @@
     class Customer extends CustomerDef implements IdentifiableByInteger
     {
         use IdentifiedByInteger;
+
 
         protected DateTime $dtCreated;
 
@@ -42,8 +43,8 @@
             Email $email,
             ?Phone $phone = null,
             ?Address $shippingAddress = null,
-            ?Address $billingAddress = null)
-        {
+            ?Address $billingAddress = null
+        ) {
             parent::__construct($name, $email, $phone, $shippingAddress, $billingAddress);
             $this->id = $id;
             $this->dtCreated = $dtCreated;
@@ -60,7 +61,7 @@
         public function toRow(): Row
         {
             $row = parent::toRow();
-            $row->add(new StringColumn("dt_created", $this->dtCreated->format(DATE_ISO8601)));
+            $row->add(new StringColumn("dt_created", $this->dtCreated->format("Y-m-d H:i:s")));
 
             return $row;
         }
