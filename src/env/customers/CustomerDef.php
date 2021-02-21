@@ -23,6 +23,7 @@
         public ?Phone $phone;
         public ?Address $shippingAddress;
         public ?Address $billingAddress;
+        public ?string $passwordHash;
 
         /**
          * CustomerDef constructor.
