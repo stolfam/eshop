@@ -58,7 +58,7 @@
                 new StringColumn('name', "$this->name"),
                 new StringColumn('email', "$this->email"),
                 new NullableStringColumn('phone', "$this->phone"),
-                new StringColumn("dt_created", date(DATE_ISO8601))
+                new StringColumn("dt_created", date("Y-m-d H:i:s"))
             ]);
             foreach ($this->consents as $name => $given) {
                 $row->add(new BoolColumn($name, $given));

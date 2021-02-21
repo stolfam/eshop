@@ -41,7 +41,7 @@
         {
             return new Row([
                 new IntegerColumn('customer_id', $this->customer->id),
-                new StringColumn('dt_created', $this->dtCreated->format(DATE_ISO8601))
+                new StringColumn('dt_created', $this->dtCreated->format("Y-m-d H:i:s"))
             ]);
         }
     }
