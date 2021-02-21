@@ -5,9 +5,11 @@
 
     use Stolfam\Env\Person\Address;
     use Stolfam\Interfaces\IStorable;
+    use Stolfam\Table\IntegerColumn;
     use Stolfam\Table\NullableStringColumn;
     use Stolfam\Table\Row;
     use Stolfam\Table\StringColumn;
+
 
     /**
      * Class AddressDef
@@ -17,10 +19,12 @@
     class AddressDef extends Address implements IStorable
     {
         public ?string $companyName;
+        public int $customerId;
 
         /**
          * AddressDef constructor.
          *
+         * @param int         $customerId
          * @param string      $street
          * @param string      $city
          * @param string      $postcode
@@ -30,15 +34,18 @@
          * @param string|null $additionalDetail
          */
         public function __construct(
+            int $customerId,
             string $street,
             string $city,
             string $postcode,
-            string $country, ?string $companyName,
+            string $country,
+            ?string $companyName,
             ?string $state = null,
-            ?string $additionalDetail = null)
-        {
+            ?string $additionalDetail = null
+        ) {
             parent::__construct($street, $city, $postcode, $country, $state, $additionalDetail);
             $this->companyName = $companyName;
+            $this->customerId = $customerId;
         }
 
         public function toRow(): Row
@@ -51,6 +58,7 @@
                 new StringColumn("country", $this->country),
                 new NullableStringColumn("state", $this->state),
                 new NullableStringColumn("additional_detail", $this->additionalDetail),
+                new IntegerColumn("customer_id", $this->customerId),
             ]);
         }
     }

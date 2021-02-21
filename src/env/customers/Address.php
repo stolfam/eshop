@@ -15,10 +15,12 @@
     {
         use IdentifiedByInteger;
 
+
         /**
          * Address constructor.
          *
          * @param int         $id
+         * @param int         $customerId
          * @param string      $street
          * @param string      $city
          * @param string      $postcode
@@ -29,6 +31,7 @@
          */
         public function __construct(
             int $id,
+            int $customerId,
             string $street,
             string $city,
             string $postcode,
@@ -37,7 +40,7 @@
             ?string $state = null,
             ?string $additionalDetail = null)
         {
-            parent::__construct($street, $city, $postcode, $country, $companyName, $state, $additionalDetail);
+            parent::__construct($customerId, $street, $city, $postcode, $country, $companyName, $state, $additionalDetail);
             $this->id = $id;
         }
     }

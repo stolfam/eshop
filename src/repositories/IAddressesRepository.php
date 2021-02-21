@@ -5,6 +5,8 @@
 
     use Stolfam\Eshop\Env\Customers\Address;
     use Stolfam\Eshop\Env\Customers\AddressDef;
+    use Stolfam\Eshop\Env\Customers\AddressList;
+
 
     /**
      * Interface IAddressesRepository
@@ -44,7 +46,7 @@
         /**
          * @param int $customerId
          *
-         * @return mixed
+         * @return AddressList
          */
-        public function listAddressesByCustomer(int $customerId);
+        public function listAddressesByCustomer(int $customerId): AddressList;
     }
