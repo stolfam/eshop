@@ -3,12 +3,12 @@
 
     namespace Stolfam\Eshop\Env\Customers;
 
-    use Stolfam\Env\Person\Address;
     use Stolfam\Env\Person\Email;
     use Stolfam\Env\Person\Name;
     use Stolfam\Eshop\Env\Consents\Consent;
     use Stolfam\Interfaces\IStorable;
     use Stolfam\Table\BoolColumn;
+    use Stolfam\Table\IntegerColumn;
     use Stolfam\Table\NullableStringColumn;
     use Stolfam\Table\Row;
     use Stolfam\Table\StringColumn;
@@ -58,10 +58,18 @@
                 new StringColumn('name', "$this->name"),
                 new StringColumn('email', "$this->email"),
                 new NullableStringColumn('phone', "$this->phone"),
-                new StringColumn("dt_created", date("Y-m-d H:i:s"))
+                new StringColumn("dt_created", date("Y-m-d H:i:s")),
+                new NullableStringColumn("password_hash", $this->passwordHash)
+
             ]);
             foreach ($this->consents as $name => $given) {
                 $row->add(new BoolColumn($name, $given));
+            }
+            if (isset($this->shippingAddress)) {
+                $row->add(new IntegerColumn("default_shipping_address_id", $this->shippingAddress->id));
+            }
+            if (isset($this->billingAddress)) {
+                $row->add(new IntegerColumn("default_billing_address_id", $this->billingAddress->id));
             }
 
             return $row;
