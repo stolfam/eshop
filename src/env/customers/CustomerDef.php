@@ -8,6 +8,7 @@
     use Stolfam\Env\Person\Name;
     use Stolfam\Eshop\Env\Consents\Consent;
     use Stolfam\Interfaces\IStorable;
+    use Stolfam\Table\BoolColumn;
     use Stolfam\Table\NullableStringColumn;
     use Stolfam\Table\Row;
     use Stolfam\Table\StringColumn;
@@ -53,12 +54,17 @@
 
         public function toRow(): Row
         {
-            return new Row([
+            $row = new Row([
                 new StringColumn('name', "$this->name"),
                 new StringColumn('email', "$this->email"),
                 new NullableStringColumn('phone', "$this->phone"),
                 new StringColumn("dt_created", date(DATE_ISO8601))
             ]);
+            foreach ($this->consents as $name => $given) {
+                $row->add(new BoolColumn($name, $given));
+            }
+
+            return $row;
         }
 
         /**
