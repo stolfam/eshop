@@ -7,6 +7,7 @@
     use Stolfam\Arrays\PairArray;
     use Stolfam\Env\Pair;
 
+
     /**
      * Class RoleList
      *
@@ -19,7 +20,7 @@
          *
          * @return RoleList
          */
-        public function add($role)
+        public function add($role): RoleList
         {
             $this->items[$role->id] = $role;
 
@@ -27,19 +28,19 @@
         }
 
         /**
-         * @return Role
+         * @return Role|null
          */
-        public function current(): Role
+        public function current(): ?Role
         {
             return parent::current();
         }
 
         /**
-         * @param $roleId
+         * @param int $roleId
          *
-         * @return Role
+         * @return Role|null
          */
-        public function get($roleId): Role
+        public function get($roleId): ?Role
         {
             return parent::get($roleId);
         }

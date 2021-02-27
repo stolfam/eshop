@@ -5,6 +5,7 @@
 
     use Stolfam\Arrays\BaseArray;
 
+
     /**
      * Class History
      *
@@ -17,7 +18,7 @@
          *
          * @return History
          */
-        public function add($status)
+        public function add($status): History
         {
             parent::add($status);
 
@@ -25,9 +26,9 @@
         }
 
         /**
-         * @return Status
+         * @return Status|null
          */
-        public function current(): Status
+        public function current(): ?Status
         {
             return parent::current();
         }
@@ -36,17 +37,19 @@
         {
             usort($this->items, function (Status $a, Status $b): int {
                 return [
-                        $b->getDate()->getTimestamp()
+                        $b->getDate()
+                            ->getTimestamp()
                     ] <=> [
-                        $a->getDate()->getTimestamp()
+                        $a->getDate()
+                            ->getTimestamp()
                     ];
             });
         }
 
         /**
-         * @return Status
+         * @return Status|null
          */
-        public function getLast(): Status
+        public function getLast(): ?Status
         {
             $this->sortByDate();
 

@@ -25,15 +25,15 @@
         }
 
         /**
-         * @return Tag
+         * @return Tag|null
          */
-        public function current(): Tag
+        public function current(): ?Tag
         {
             return parent::current();
         }
 
         /**
-         * @param $tagId
+         * @param int $tagId
          *
          * @return Tag|null
          */

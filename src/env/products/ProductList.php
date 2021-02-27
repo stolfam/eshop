@@ -18,7 +18,7 @@
          *
          * @return ProductList
          */
-        public function add($product)
+        public function add($product): ProductList
         {
             parent::add($product);
 
@@ -26,9 +26,9 @@
         }
 
         /**
-         * @return Product
+         * @return Product|null
          */
-        public function current(): Product
+        public function current(): ?Product
         {
             return parent::current();
         }

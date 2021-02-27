@@ -17,7 +17,7 @@
          *
          * @return OrderList
          */
-        public function add($order)
+        public function add($order): OrderList
         {
             $this->items[$order->id] = $order;
 
@@ -25,15 +25,15 @@
         }
 
         /**
-         * @return Order
+         * @return Order|null
          */
-        public function current(): Order
+        public function current(): ?Order
         {
             return parent::current();
         }
 
         /**
-         * @param $orderId
+         * @param int $orderId
          *
          * @return Order|null
          */
@@ -47,7 +47,7 @@
          *
          * @return OrderList
          */
-        public function insert($orderList)
+        public function insert($orderList): OrderList
         {
             parent::insert($orderList);
 
