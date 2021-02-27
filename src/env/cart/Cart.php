@@ -5,6 +5,7 @@
 
     use Nette\SmartObject;
     use Nette\Utils\Random;
+    use Stolfam\Eshop\Env\Attributes\AttributeList;
     use Stolfam\Eshop\Repositories\Interfaces\IProductsRepository;
     use Stolfam\Eshop\Utils\Currency;
     use Stolfam\Eshop\Utils\Price;
@@ -143,8 +144,17 @@
         {
             $list = new RenderableCartItemList();
             foreach ($this->listProducts() as $cartItem) {
-                $list->add(new RenderableCartItem($this->productsRepository->getProduct($cartItem->productId),
-                    $cartItem->quantity));
+                $product = $this->productsRepository->getProduct($cartItem->productId);
+                $attributes = new AttributeList();
+                if (!empty($cartItem->attributeValueIds)) {
+                    foreach ($cartItem->attributeValueIds as $attributeValueId) {
+                        $attribute = $product->attributes->findAttributeOfValue($attributeValueId);
+                        if ($attribute != null) {
+                            $attributes->add($attribute);
+                        }
+                    }
+                }
+                $list->add(new RenderableCartItem($product, $cartItem->quantity, $attributes));
             }
 
             return $list;

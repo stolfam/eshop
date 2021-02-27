@@ -27,13 +27,13 @@
             return $tag;
         }
 
-        public function getTag(\Ataccama\Common\Env\IEntry $tag): \Stolfam\Eshop\Env\Tags\Tag
+        public function getTag(int $tagId): \Stolfam\Eshop\Env\Tags\Tag
         {
-            $t = $this->tags->get($tag->id);
+            $t = $this->tags->get($tagId);
             if (isset($t)) {
                 return $t;
             }
-            throw new \Ataccama\Common\Exceptions\NotDefined("Tag with ID #$tag->id does not exist.");
+            throw new Exception("Tag with ID #$tagId does not exist.");
         }
 
         public function getTagByName(string $name): \Stolfam\Eshop\Env\Tags\Tag
@@ -47,9 +47,9 @@
             return $this->createTag(new \Stolfam\Eshop\Env\Tags\TagDef($name));
         }
 
-        public function deleteTag(\Ataccama\Common\Env\IEntry $tag): bool
+        public function deleteTag(int $tagId): bool
         {
-            return $this->tags->remove($tag->id);
+            return $this->tags->remove($tagId);
         }
 
         public function listTags(): \Stolfam\Eshop\Env\Tags\TagList
@@ -71,7 +71,5 @@
     Assert::same(2, $tagsRepository->getTagByName("test-tag-2")->id);
 
     Assert::exception(function () use ($tagsRepository) {
-        $tagsRepository->getTag(new \Ataccama\Common\Env\Entry(3));
-    }, \Ataccama\Common\Exceptions\NotDefined::class);
-
-    Assert::same("test-tag",$tag->toPairs()->get("name")->getValue());
+        $tagsRepository->getTag(3);
+    }, Exception::class);

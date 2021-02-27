@@ -2,8 +2,11 @@
     require __DIR__ . "/../bootstrap.php";
 
     require_once __DIR__ . "/../implementations/CartStorage.php";
+    require_once __DIR__ . "/../implementations/TestProductsRepository.php";
 
-    $cart = new \Stolfam\Eshop\Env\Cart\Cart(new \Stolfam\Eshop\Test\Implementations\CartStorage());
+    $productsRepository = new \Stolfam\Eshop\Test\Implementations\TestProductsRepository();
+    $cart = new \Stolfam\Eshop\Env\Cart\Cart(new \Stolfam\Eshop\Test\Implementations\CartStorage(),
+        $productsRepository);
 
     $cart->addProduct(1);
     $cart->addProduct(2);

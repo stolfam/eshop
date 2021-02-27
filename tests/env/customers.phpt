@@ -15,4 +15,4 @@
 
     $customerDef = new \Stolfam\Eshop\Env\Customers\CustomerDef(new \Stolfam\Env\Person\Name("Jan Novák"),
         new \Stolfam\Env\Person\Email("jan.novak@email.cz"), $phone,
-        new \Stolfam\Eshop\Env\Customers\Address(1, "Nová 1", "Praha", "12000", "Česká Republika"));
+        new \Stolfam\Eshop\Env\Customers\Address(1, 1, "Nová 1", "Praha", "12000", "Česká Republika"));

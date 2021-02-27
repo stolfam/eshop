@@ -33,7 +33,6 @@
             } else {
                 $this->name = $name;
             }
-
         }
 
         public function toRow(): Row

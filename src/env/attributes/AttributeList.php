@@ -5,6 +5,7 @@
 
     use Stolfam\Arrays\BaseArray;
 
+
     /**
      * Class AttributeList
      *
@@ -50,5 +51,47 @@
             }
 
             return $arr;
+        }
+
+        /**
+         * Tries to find a value of attribute and returns it or null.
+         *
+         * @param int $attributeValueId
+         * @return IAttributeValue|null
+         */
+        public function findValue(int $attributeValueId): ?IAttributeValue
+        {
+            foreach ($this as $attribute) {
+                $value = $attribute->getValues()
+                    ->get($attributeValueId);
+                if (!empty($value)) {
+                    return $value;
+                }
+            }
+
+            return null;
+        }
+
+        /**
+         * @param int $attributeValueId
+         * @return IAttribute|null
+         */
+        public function findAttributeOfValue(int $attributeValueId): ?IAttribute
+        {
+            foreach ($this as $attribute) {
+                $value = $attribute->getValues()
+                    ->get($attributeValueId);
+                if (!empty($value)) {
+                    $a = clone $attribute;
+                    $a->getValues()
+                        ->clear();
+                    $a->getValues()
+                        ->add($value);
+
+                    return $a;
+                }
+            }
+
+            return null;
         }
     }

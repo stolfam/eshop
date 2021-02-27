@@ -5,7 +5,7 @@
 
     $productsRepository = new class implements \Stolfam\Eshop\Repositories\Interfaces\IProductsRepository {
         /** @var \Stolfam\Eshop\Env\Products\ProductList */
-        private $products;
+        private \Stolfam\Eshop\Env\Products\ProductList $products;
 
         /**
          *  constructor.
@@ -34,14 +34,15 @@
             return $product;
         }
 
-        public function listProducts(\Nette\Utils\Paginator &$paginator = null): \Stolfam\Eshop\Env\Products\ProductList
+        public function listProducts(?\Stolfam\Eshop\Env\Products\Filter $filter = null, ?\Nette\Utils\Paginator &$paginator = null): \Stolfam\Eshop\Env\Products\ProductList
         {
             return $this->products;
         }
 
+
         public function deleteProduct(int $productId): bool
         {
-            return $this->products->remove($product->id);
+            return $this->products->remove($productId);
         }
 
         public function updateProduct(\Stolfam\Eshop\Env\Products\Product $product): \Stolfam\Eshop\Env\Products\Product
@@ -64,11 +65,11 @@
     \Tester\Assert::same(" Kč",
         $productsRepository->getProduct(1)->price->currency->symbol->after);
 
-    $cart = new \Stolfam\Eshop\Env\Cart\Cart(new \Stolfam\Eshop\Test\Implementations\CartStorage());
+    $cart = new \Stolfam\Eshop\Env\Cart\Cart(new \Stolfam\Eshop\Test\Implementations\CartStorage(),$productsRepository);
 
     $cart->addProduct($product->id);
 
-    $list = $cart->listPrintableProducts($productsRepository);
+    $list = $cart->listPrintableProducts();
 
     \Tester\Assert::same("product", $list->get(0)->product->name);
 
