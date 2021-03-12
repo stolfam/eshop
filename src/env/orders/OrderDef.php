@@ -4,6 +4,7 @@
     namespace Stolfam\Eshop\Env\Orders;
 
     use Nette\Utils\DateTime;
+    use Stolfam\Eshop\Env\Customers\Customer;
     use Stolfam\Eshop\Env\Products\ProductList;
     use Stolfam\Interfaces\IdentifiableByInteger;
     use Stolfam\Interfaces\IStorable;
@@ -30,7 +31,7 @@
         /**
          * OrderDef constructor.
          *
-         * @param IdentifiableByInteger $customer
+         * @param Customer              $customer
          * @param ProductList           $products
          * @param DateTime              $dtCreated
          * @param IdentifiableByInteger $shippingMethod
@@ -38,7 +39,7 @@
          * @param int|null              $storeAddressId
          */
         public function __construct(
-            IdentifiableByInteger $customer,
+            Customer $customer,
             ProductList $products,
             DateTime $dtCreated,
             IdentifiableByInteger $shippingMethod,
@@ -60,6 +61,8 @@
                 new StringColumn('dt_created', $this->dtCreated->format("Y-m-d H:i:s")),
                 new IntegerColumn("shipping_method_id", $this->shippingMethod->getId()),
                 new IntegerColumn("payment_method_id", $this->paymentMethod->getId()),
+                new IntegerColumn("shipping_address_id", $this->customer->shippingAddress->getId()),
+                new IntegerColumn("billing_address_id", $this->customer->billingAddress->getId()),
                 new NullableIntegerColumn("store_address_id", $this->storeAddressId)
             ]);
         }
