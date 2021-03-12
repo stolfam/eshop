@@ -8,6 +8,7 @@
     use Stolfam\Interfaces\IdentifiableByInteger;
     use Stolfam\Interfaces\IStorable;
     use Stolfam\Table\IntegerColumn;
+    use Stolfam\Table\NullableIntegerColumn;
     use Stolfam\Table\Row;
     use Stolfam\Table\StringColumn;
 
@@ -24,6 +25,7 @@
         public IdentifiableByInteger $customer;
         public IdentifiableByInteger $shippingMethod;
         public IdentifiableByInteger $paymentMethod;
+        public ?int $storeAddressId;
 
         /**
          * OrderDef constructor.
@@ -33,19 +35,22 @@
          * @param DateTime              $dtCreated
          * @param IdentifiableByInteger $shippingMethod
          * @param IdentifiableByInteger $paymentMethod
+         * @param int|null              $storeAddressId
          */
         public function __construct(
             IdentifiableByInteger $customer,
             ProductList $products,
             DateTime $dtCreated,
             IdentifiableByInteger $shippingMethod,
-            IdentifiableByInteger $paymentMethod
+            IdentifiableByInteger $paymentMethod,
+            ?int $storeAddressId = null
         ) {
             $this->products = $products;
             $this->dtCreated = $dtCreated;
             $this->customer = $customer;
             $this->shippingMethod = $shippingMethod;
             $this->paymentMethod = $paymentMethod;
+            $this->storeAddressId = $storeAddressId;
         }
 
         public function toRow(): Row
@@ -54,7 +59,8 @@
                 new IntegerColumn('customer_id', $this->customer->id),
                 new StringColumn('dt_created', $this->dtCreated->format("Y-m-d H:i:s")),
                 new IntegerColumn("shipping_method_id", $this->shippingMethod->getId()),
-                new IntegerColumn("payment_method_id", $this->paymentMethod->getId())
+                new IntegerColumn("payment_method_id", $this->paymentMethod->getId()),
+                new NullableIntegerColumn("store_address_id", $this->storeAddressId)
             ]);
         }
     }

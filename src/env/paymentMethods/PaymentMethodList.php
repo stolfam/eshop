@@ -4,6 +4,8 @@
     namespace Stolfam\Eshop\Env\PaymentMethods;
 
     use Stolfam\Arrays\BaseArray;
+    use Stolfam\Arrays\PairArray;
+    use Stolfam\Env\Pair;
 
 
     /**
@@ -38,5 +40,25 @@
         public function get($paymentMethodId): ?IPaymentMethod
         {
             return parent::get($paymentMethodId);
+        }
+
+        public function toPairArray(): PairArray
+        {
+            $pairs = new PairArray();
+            foreach ($this as $paymentMethod) {
+                $pairs->add(new Pair($paymentMethod->getId(), $paymentMethod->getName()));
+            }
+
+            return $pairs;
+        }
+
+        public function toArray(): array
+        {
+            $items = [];
+            foreach ($this as $paymentMethod) {
+                $items[$paymentMethod->getId()] = $paymentMethod;
+            }
+
+            return $items;
         }
     }
