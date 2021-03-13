@@ -23,6 +23,7 @@
      * @package Stolfam\Eshop\Env\Orders
      * @property-read DateTime $dtUpdated;
      * @property-read Price    $price
+     * @property-read Price    $totalPrice
      */
     class Order extends OrderDef implements IdentifiableByInteger
     {
@@ -87,5 +88,17 @@
             }
 
             return $price;
+        }
+
+        /**
+         * @return Price
+         */
+        public function getTotalPrice(): Price
+        {
+            $totalPrice = $this->getPrice();
+            $totalPrice->plus($this->shippingMethod->getPrice());
+            $totalPrice->plus($this->paymentMethod->getPrice());
+
+            return $totalPrice;
         }
     }
