@@ -62,7 +62,7 @@
             $row = parent::toRow();
             $row->add(new IntegerColumn("status_id", $this->history->getLast()
                 ->getId()));
-            $row->add(new StringColumn("dt_created", $this->dtCreated->format("Y-m-d H:is")));
+            $row->add(new StringColumn("dt_created", $this->dtCreated->format("Y-m-d H:i:s")));
 
             return $row;
         }
