@@ -38,10 +38,12 @@
             usort($this->items, function (Status $a, Status $b): int {
                 return [
                         $b->getDate()
-                            ->getTimestamp()
+                            ->getTimestamp(),
+                        $b->getId()
                     ] <=> [
                         $a->getDate()
-                            ->getTimestamp()
+                            ->getTimestamp(),
+                        $a->getId()
                     ];
             });
         }
